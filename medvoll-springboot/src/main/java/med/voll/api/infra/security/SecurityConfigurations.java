@@ -25,7 +25,7 @@ public class SecurityConfigurations {
         return http.cors(cors -> cors.disable()).csrf(csrf -> csrf.disable()).sessionManagement().sessionCreationPolicy(
                 SessionCreationPolicy.STATELESS).and()
                 .authorizeHttpRequests(
-                        authorizeRequests -> authorizeRequests.requestMatchers(HttpMethod.POST, "/login").permitAll().anyRequest().authenticated()).
+                        authorizeRequests -> authorizeRequests.requestMatchers(HttpMethod.POST, "/login").permitAll().requestMatchers("/v3/api-docs/**").permitAll().requestMatchers("/swagger-ui/**").permitAll().requestMatchers("/swagger-ui.html").permitAll().anyRequest().authenticated()).
                 addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class).build();
     }
 
